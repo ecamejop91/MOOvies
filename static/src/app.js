@@ -7,6 +7,46 @@ const recommendBtn = $("recommendBtn");
 const recommendationsStatus = $("recommendationsStatus");
 const recommendationsList = $("recommendationsList");
 
+// Initialize Firebase in the app
+const auth = firebase.auth();
+
+// Add user info and logout button to header
+const header = document.querySelector('header');
+const userContainer = document.createElement('div');
+userContainer.className = 'user-container';
+const userEmail = document.createElement('span');
+userEmail.className = 'user-email';
+const logoutBtn = document.createElement('button');
+logoutBtn.textContent = 'Sign Out';
+logoutBtn.className = 'logout-button';
+userContainer.appendChild(userEmail);
+userContainer.appendChild(logoutBtn);
+header.appendChild(userContainer);
+
+// Handle authentication state changes
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    // Update UI with user info
+    userEmail.textContent = user.email;
+    const idToken = await user.getIdToken();
+    localStorage.setItem('authToken', idToken);
+  } else {
+    // Redirect to login if not authenticated
+    window.location.href = '/login';
+  }
+});
+
+// Handle logout
+logoutBtn.addEventListener('click', async () => {
+  try {
+    await auth.signOut();
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  } catch (err) {
+    console.error('Logout error:', err);
+  }
+});
+
 const movieTitle = $("movieTitle");
 const movieOverview = $("movieOverview");
 const movieRating = $("movieRating");
@@ -36,9 +76,34 @@ function setOverviewBg(path) {
     });
 }
 
-// Generic fetch helper
+// Generic fetch helper with authentication
+async function fetchWithAuth(url, options = {}) {
+  const token = localStorage.getItem('authToken');
+  if (!token) {
+    window.location.href = '/login';
+    throw new Error('No auth token available');
+  }
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    ...options.headers
+  };
+
+  const response = await fetch(url, { ...options, headers });
+  
+  if (response.status === 401) {
+    // Token might be expired - redirect to login
+    window.location.href = '/login';
+    throw new Error('Authentication failed');
+  }
+  
+  return response;
+}
+
+// Generic fetch helper with auth
 async function getMovieData(query) {
-  const res = await fetch(
+  const res = await fetchWithAuth(
     `${MOVIE_ENDPOINT}?query=${encodeURIComponent(query)}`
   );
   const data = await res.json();
@@ -181,11 +246,8 @@ async function getRecommendations(description) {
   setRecommendationStatus("Fetching recommendations…");
   recommendationsList.innerHTML = "";
   try {
-    const res = await fetch(RECOMMEND_ENDPOINT, {
+    const res = await fetchWithAuth(RECOMMEND_ENDPOINT, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ description }),
     });
     const data = await res.json();

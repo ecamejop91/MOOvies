@@ -11,7 +11,7 @@
     <div class="frame">
       <header>
         <h1>MOOvies</h1>
-        <p>Search TMDB data and get AI-powered movie recommendations.</p>
+        
       </header>
 
       <div class="searchbar">
@@ -27,7 +27,7 @@
       <section class="layout-grid" aria-label="movie layout">
         <div id="heroPanel" class="box hero-panel" aria-live="polite">
           <div class="hero-backdrop" id="heroBackdrop" aria-hidden="true"></div>
-          <p class="hero-hint">Paint the canvas with a title.</p>
+          <p class="hero-hint"></p>
           <div id="movieTitle" class="hero-title">Awaiting Selection</div>
         </div>
 
@@ -66,9 +66,8 @@
             rows="4"
             placeholder="Describe a movie vibe, plot, or tone…"
           ></textarea>
-          <button id="recommendBtn" type="button">Get Recommendations</button>
-          <p class="hint">
-            The description is sent to the backend, which calls OpenAI for matches.
+          <button id="recommendBtn" type="button">Lets find the movie!</button>
+          
           </p>
         </div>
         <div class="box recommendations-box" aria-live="polite">

@@ -1,8 +1,11 @@
 import json
 import os
+from functools import wraps
 from typing import Dict, List, Optional
 
+import firebase_admin
 import requests
+from firebase_admin import auth, credentials
 from flask import Flask, jsonify, request, send_from_directory
 from openai import OpenAI
 
@@ -21,6 +24,29 @@ TMDB_BASE = "https://api.themoviedb.org/3"
 app = Flask(__name__, static_folder="static", static_url_path="")
 client = None
 
+# Initialize Firebase Admin
+cred = credentials.Certificate('firebase-credentials.json')
+firebase_admin.initialize_app(cred)
+
+def auth_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return jsonify({'error': 'No token provided'}), 401
+        
+        token = auth_header.split('Bearer ')[1]
+        try:
+            # Verify the ID token
+            decoded_token = auth.verify_id_token(token)
+            # Add user info to request context
+            request.user = decoded_token
+            return f(*args, **kwargs)
+        except Exception as e:
+            return jsonify({'error': 'Invalid token'}), 401
+            
+    return decorated_function
+
 
 @app.before_request
 def ensure_client() -> None:
@@ -34,11 +60,35 @@ def ensure_client() -> None:
 
 
 @app.get("/")
+@auth_required
 def index():
     return send_from_directory(app.static_folder, "index.html")
 
+@app.get("/login")
+def login_page():
+    return send_from_directory(app.static_folder, "login.html")
+
+@app.post("/api/verify-token")
+def verify_token():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return jsonify({'error': 'No token provided'}), 401
+    
+    token = auth_header.split('Bearer ')[1]
+    try:
+        # Verify the ID token
+        decoded_token = auth.verify_id_token(token)
+        return jsonify({
+            'uid': decoded_token['uid'],
+            'email': decoded_token.get('email'),
+            'email_verified': decoded_token.get('email_verified', False)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 401
+
 
 @app.post("/api/recommend")
+@auth_required
 def recommend():
     payload = request.get_json(silent=True) or {}
     description = (payload.get("description") or "").strip()
@@ -81,6 +131,7 @@ def recommend():
 
 
 @app.get("/api/movie")
+@auth_required
 def movie_lookup():
     query = (request.args.get("query") or "").strip()
     if not query:

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOOvies – Sign In</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <!-- Firebase UI -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
+    <!-- App Scripts -->
+    <script src="./src/firebase-config.js"></script>
+    <script src="./src/auth.js"></script>
+  </head>
+  <body>
+    <div class="frame login-frame">
+      <header>
+        <h1>MOOvies</h1>
+      </header>
+
+      <div class="login-container">
+        <h2>Welcome to MOOvies</h2>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+        <div class="auth-message">
+          <p>Sign in to access your movie recommendations and save your preferences.</p>
+          <p>You can use your Google account or create a new account with email.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
