@@ -7,8 +7,8 @@ const recommendBtn = $("recommendBtn");
 const recommendationsStatus = $("recommendationsStatus");
 const recommendationsList = $("recommendationsList");
 
-// Initialize Firebase in the app
-const auth = firebase.auth();
+// Initialize Firebase in the app (loaded globally on the page)
+const auth = window.firebase ? firebase.auth() : null;
 
 // Add user info and logout button to header
 const header = document.querySelector('header');
@@ -23,27 +23,49 @@ userContainer.appendChild(userEmail);
 userContainer.appendChild(logoutBtn);
 header.appendChild(userContainer);
 
-// Handle authentication state changes
-auth.onAuthStateChanged(async (user) => {
-  if (user) {
-    // Update UI with user info
-    userEmail.textContent = user.email;
-    const idToken = await user.getIdToken();
-    localStorage.setItem('authToken', idToken);
-  } else {
-    // Redirect to login if not authenticated
-    window.location.href = '/login';
-  }
-});
+const isGuestMode = () => localStorage.getItem('guestMode') === 'true';
+
+function setUserLabel(label) {
+  userEmail.textContent = label;
+}
+
+if (isGuestMode()) {
+  setUserLabel('Guest Mode');
+}
+
+if (auth) {
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      setUserLabel(user.email || 'Signed in');
+      try {
+        const idToken = await user.getIdToken();
+        localStorage.setItem('authToken', idToken);
+        localStorage.setItem('guestMode', 'false');
+      } catch (err) {
+        console.error('Failed to refresh auth token', err);
+      }
+    } else if (isGuestMode()) {
+      localStorage.removeItem('authToken');
+      setUserLabel('Guest Mode');
+    } else {
+      window.location.href = '/';
+    }
+  });
+}
 
 // Handle logout
 logoutBtn.addEventListener('click', async () => {
   try {
-    await auth.signOut();
-    localStorage.removeItem('authToken');
-    window.location.href = '/login';
+    if (auth && auth.currentUser) {
+      await auth.signOut();
+    }
   } catch (err) {
     console.error('Logout error:', err);
+  } finally {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('guestMode');
+    window.location.href = '/';
   }
 });
 
@@ -76,28 +98,25 @@ function setOverviewBg(path) {
     });
 }
 
-// Generic fetch helper with authentication
+// Generic fetch helper with optional authentication
 async function fetchWithAuth(url, options = {}) {
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    window.location.href = '/login';
-    throw new Error('No auth token available');
-  }
-
   const headers = {
-    'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
-    ...options.headers
+    ...options.headers,
   };
 
-  const response = await fetch(url, { ...options, headers });
-  
-  if (response.status === 401) {
-    // Token might be expired - redirect to login
-    window.location.href = '/login';
-    throw new Error('Authentication failed');
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
-  
+
+  const response = await fetch(url, { ...options, headers });
+
+  if (response.status === 401 && !isGuestMode()) {
+    window.location.href = '/';
+    throw new Error('Authentication required');
+  }
+
   return response;
 }
 

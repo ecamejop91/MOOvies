@@ -9,12 +9,10 @@ const uiConfig = {
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
   signInFlow: 'popup',
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/app',
   callbacks: {
-    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-      // User successfully signed in.
-      // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
+    signInSuccessWithAuthResult: function authSuccess() {
+      // Continue with the default redirect behavior to /app.
       return true;
     },
   },
@@ -30,6 +28,10 @@ auth.onAuthStateChanged(async (user) => {
     const idToken = await user.getIdToken();
     // Store it in localStorage for API requests
     localStorage.setItem('authToken', idToken);
+    localStorage.setItem('guestMode', 'false');
+    if (user.email) {
+      localStorage.setItem('userEmail', user.email);
+    }
     
     // Update UI if needed
     const loader = document.getElementById('loader');
@@ -39,9 +41,17 @@ auth.onAuthStateChanged(async (user) => {
   } else {
     // User is signed out
     localStorage.removeItem('authToken');
-    // Redirect to login if not already there
-    if (!window.location.pathname.includes('/login')) {
-      window.location.href = '/login';
-    }
+    localStorage.removeItem('userEmail');
   }
 });
+
+// Guest access button
+const guestButton = document.getElementById('guestAccessBtn');
+if (guestButton) {
+  guestButton.addEventListener('click', () => {
+    localStorage.setItem('guestMode', 'true');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userEmail');
+    window.location.href = '/app';
+  });
+}

@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MOOvies – Movie Finder</title>
     <link rel="stylesheet" href="./src/style.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js" defer></script>
+    <script src="./src/firebase-config.js" defer></script>
     <script src="./src/app.js" defer></script>
   </head>
   <body>
-    <div class="frame">
+    <div class="frame" id="appShell">
       <header>
         <h1>MOOvies</h1>
         
@@ -67,8 +70,6 @@
             placeholder="Describe a movie vibe, plot, or tone…"
           ></textarea>
           <button id="recommendBtn" type="button">Lets find the movie!</button>
-          
-          </p>
         </div>
         <div class="box recommendations-box" aria-live="polite">
           <div class="label">AI Recommendations</div>
