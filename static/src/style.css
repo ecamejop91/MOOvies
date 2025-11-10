@@ -1,0 +1,297 @@
+:root {
+  color-scheme: dark;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #0f1117;
+  color: #f7f7f7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a1f2c, #080a10);
+}
+
+.frame {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.08em;
+}
+
+header p {
+  margin: 6px 0 0;
+  color: #a3acc3;
+}
+
+.searchbar {
+  display: flex;
+  gap: 12px;
+}
+
+.searchbar input {
+  flex: 1;
+  font-size: 1rem;
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: 1px solid #343b4f;
+  background: #111423;
+  color: inherit;
+}
+
+.searchbar button,
+#recommendBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(120deg, #e91f63, #ff9800);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.searchbar button:hover,
+#recommendBtn:hover {
+  opacity: 0.85;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+  grid-auto-rows: minmax(220px, auto);
+  grid-template-areas:
+    "hero hero hero"
+    "overview reviews rating"
+    "overview cast cast";
+  gap: 18px;
+}
+
+.box {
+  position: relative;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(13, 17, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #8a94ad;
+  margin-bottom: 8px;
+}
+
+.hero-panel {
+  grid-area: hero;
+  min-height: 320px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(233, 31, 99, 0.35), transparent 55%),
+    rgba(13, 17, 26, 0.6);
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, rgba(3, 5, 9, 0.85), rgba(8, 10, 16, 0.6));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px);
+  opacity: 0.4;
+  transform: scale(1.1);
+}
+
+.hero-hint {
+  position: relative;
+  z-index: 2;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 8px;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(3rem, 9vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.15);
+  margin: 0;
+  user-select: none;
+}
+
+#movieOverview {
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+}
+
+#overview {
+  grid-area: overview;
+}
+
+#reviews {
+  grid-area: reviews;
+}
+
+#rating {
+  grid-area: rating;
+}
+
+#cast {
+  grid-area: cast;
+}
+
+#overview .bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  z-index: 0;
+}
+
+#movieRating {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#reviewsContainer {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.cast-grid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+
+.cast-card {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  width: 140px;
+  height: 180px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8f96ad;
+  font-size: 0.8rem;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.cast-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ai-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 18px;
+  border: 1px solid #343b4f;
+  background: rgba(17, 20, 35, 0.9);
+  color: inherit;
+  padding: 14px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #8791ac;
+  margin-top: 12px;
+}
+
+#recommendationsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recommendation-pill {
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.recommendation-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .searchbar {
+    flex-direction: column;
+  }
+
+  .searchbar button {
+    width: 100%;
+  }
+
+  .layout-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "overview"
+      "reviews"
+      "rating"
+      "cast";
+  }
+
+  .hero-panel {
+    min-height: 220px;
+  }
+}
