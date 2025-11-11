@@ -5,3 +5,348 @@
 [2025-11-10 02:09:05 +0000] [16295] [INFO] Handling signal: term
 [2025-11-10 02:09:05 +0000] [16297] [INFO] Worker exiting (pid: 16297)
 [2025-11-10 02:09:05 +0000] [16295] [INFO] Shutting down: Master
+[2025-11-10 08:13:23 +0000] [26243] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:13:23 +0000] [26243] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:13:23 +0000] [26243] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:13:24 +0000] [26243] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:13:24 +0000] [26243] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:13:25 +0000] [26243] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:13:25 +0000] [26243] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:13:26 +0000] [26243] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:13:26 +0000] [26243] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:13:27 +0000] [26243] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:13:27 +0000] [26243] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:13:28 +0000] [26243] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:14:26 +0000] [26278] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:14:26 +0000] [26278] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:14:26 +0000] [26278] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:14:27 +0000] [26278] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:14:27 +0000] [26278] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:14:28 +0000] [26278] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:14:28 +0000] [26278] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:14:29 +0000] [26278] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:14:29 +0000] [26278] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:14:30 +0000] [26278] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:14:30 +0000] [26278] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:14:31 +0000] [26278] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:14:54 +0000] [26304] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:14:54 +0000] [26304] [INFO] Listening at: http://0.0.0.0:5000 (26304)
+[2025-11-10 08:14:54 +0000] [26304] [INFO] Using worker: sync
+[2025-11-10 08:14:54 +0000] [26305] [INFO] Booting worker with pid: 26305
+[2025-11-10 08:15:14,752] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 39, in ensure_client
+    client = _build_openai_client()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 15, in _build_openai_client
+    raise RuntimeError(
+RuntimeError: OPENAI_API_KEY is not set. Export it before starting the server.
+[2025-11-10 08:15:14,755] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 39, in ensure_client
+    client = _build_openai_client()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 15, in _build_openai_client
+    raise RuntimeError(
+RuntimeError: OPENAI_API_KEY is not set. Export it before starting the server.
+[2025-11-10 08:15:21,131] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 39, in ensure_client
+    client = _build_openai_client()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 15, in _build_openai_client
+    raise RuntimeError(
+RuntimeError: OPENAI_API_KEY is not set. Export it before starting the server.
+[2025-11-10 08:15:22,619] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 39, in ensure_client
+    client = _build_openai_client()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 15, in _build_openai_client
+    raise RuntimeError(
+RuntimeError: OPENAI_API_KEY is not set. Export it before starting the server.
+[2025-11-10 08:15:23,309] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 39, in ensure_client
+    client = _build_openai_client()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/server.py", line 15, in _build_openai_client
+    raise RuntimeError(
+RuntimeError: OPENAI_API_KEY is not set. Export it before starting the server.
+[2025-11-10 08:15:53 +0000] [26304] [CRITICAL] WORKER TIMEOUT (pid:26305)
+[2025-11-10 08:15:53 +0000] [26305] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-10 08:15:53 +0000] [26305] [INFO] Worker exiting (pid: 26305)
+[2025-11-10 08:15:53 +0000] [26346] [INFO] Booting worker with pid: 26346
+[2025-11-10 08:15:56 +0000] [26304] [INFO] Handling signal: term
+[2025-11-10 08:15:56 +0000] [26346] [INFO] Worker exiting (pid: 26346)
+[2025-11-10 08:15:56 +0000] [26304] [INFO] Shutting down: Master
+[2025-11-10 08:16:10 +0000] [26357] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:16:10 +0000] [26357] [INFO] Listening at: http://0.0.0.0:5000 (26357)
+[2025-11-10 08:16:10 +0000] [26357] [INFO] Using worker: sync
+[2025-11-10 08:16:10 +0000] [26358] [INFO] Booting worker with pid: 26358
+[2025-11-10 08:43:19 +0000] [26987] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:24 +0000] [26989] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:29 +0000] [26995] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:34 +0000] [27006] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:40 +0000] [27008] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:45 +0000] [27014] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:50 +0000] [27022] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:43:55 +0000] [27024] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:01 +0000] [27027] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:06 +0000] [27029] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:11 +0000] [27031] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:16 +0000] [27034] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:22 +0000] [27036] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:27 +0000] [27038] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:32 +0000] [27040] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:37 +0000] [27044] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:43 +0000] [27046] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:48 +0000] [27048] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:53 +0000] [27050] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:44:58 +0000] [27052] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:04 +0000] [27076] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:09 +0000] [27083] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:14 +0000] [27085] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:19 +0000] [27087] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:25 +0000] [27089] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:30 +0000] [27091] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:35 +0000] [27112] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:45:40 +0000] [27114] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:14 +0000] [27204] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:14 +0000] [27204] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:14 +0000] [27204] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:15 +0000] [27204] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:15 +0000] [27204] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:16 +0000] [27204] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:16 +0000] [27204] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:17 +0000] [27204] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:17 +0000] [27204] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:18 +0000] [27204] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:18 +0000] [27204] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:19 +0000] [27204] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:47:25 +0000] [27212] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:25 +0000] [27212] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:25 +0000] [27212] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:26 +0000] [27212] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:26 +0000] [27212] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:27 +0000] [27212] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:27 +0000] [27212] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:28 +0000] [27212] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:28 +0000] [27212] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:29 +0000] [27212] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:29 +0000] [27212] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:30 +0000] [27212] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:47:35 +0000] [27218] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:35 +0000] [27218] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:35 +0000] [27218] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:36 +0000] [27218] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:36 +0000] [27218] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:37 +0000] [27218] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:37 +0000] [27218] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:38 +0000] [27218] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:38 +0000] [27218] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:39 +0000] [27218] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:39 +0000] [27218] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:40 +0000] [27218] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:47:45 +0000] [27226] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:45 +0000] [27226] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:45 +0000] [27226] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:46 +0000] [27226] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:46 +0000] [27226] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:47 +0000] [27226] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:47 +0000] [27226] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:48 +0000] [27226] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:48 +0000] [27226] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:49 +0000] [27226] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:49 +0000] [27226] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:50 +0000] [27226] [ERROR] Can't connect to ('0.0.0.0', 5000)
+[2025-11-10 08:47:55 +0000] [27228] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:47:55 +0000] [27228] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:55 +0000] [27228] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:56 +0000] [27228] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:56 +0000] [27228] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:57 +0000] [27228] [ERROR] Connection in use: ('0.0.0.0', 5000)
+[2025-11-10 08:47:57 +0000] [27228] [ERROR] connection to ('0.0.0.0', 5000) failed: [Errno 98] Address already in use
+[2025-11-10 08:47:58 +0000] [26357] [INFO] Handling signal: term
+[2025-11-10 08:47:58 +0000] [26358] [INFO] Worker exiting (pid: 26358)
+[2025-11-10 08:47:58 +0000] [27228] [INFO] Listening at: http://0.0.0.0:5000 (27228)
+[2025-11-10 08:47:58 +0000] [27228] [INFO] Using worker: sync
+[2025-11-10 08:47:58 +0000] [27235] [INFO] Booting worker with pid: 27235
+[2025-11-10 08:47:59 +0000] [26357] [INFO] Shutting down: Master
+[2025-11-10 08:53:34 +0000] [27228] [INFO] Handling signal: term
+[2025-11-10 08:53:34 +0000] [27235] [INFO] Worker exiting (pid: 27235)
+[2025-11-10 08:53:35 +0000] [27228] [INFO] Shutting down: Master
+[2025-11-10 08:54:34 +0000] [539] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 08:54:34 +0000] [539] [INFO] Listening at: http://0.0.0.0:5000 (539)
+[2025-11-10 08:54:34 +0000] [539] [INFO] Using worker: sync
+[2025-11-10 08:54:34 +0000] [730] [INFO] Booting worker with pid: 730
+[2025-11-10 09:00:29 +0000] [539] [CRITICAL] WORKER TIMEOUT (pid:730)
+[2025-11-10 09:01:10 +0000] [539] [ERROR] Worker (pid:730) was sent SIGKILL! Perhaps out of memory?
+[2025-11-10 09:01:10 +0000] [1242] [INFO] Booting worker with pid: 1242
+[2025-11-10 09:27:27 +0000] [540] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 09:27:27 +0000] [540] [INFO] Listening at: http://0.0.0.0:5000 (540)
+[2025-11-10 09:27:27 +0000] [540] [INFO] Using worker: sync
+[2025-11-10 09:27:27 +0000] [731] [INFO] Booting worker with pid: 731
+[2025-11-10 09:39:43 +0000] [540] [CRITICAL] WORKER TIMEOUT (pid:731)
+[2025-11-10 09:39:43 +0000] [731] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-10 09:39:43 +0000] [731] [INFO] Worker exiting (pid: 731)
+[2025-11-10 09:39:43 +0000] [1018] [INFO] Booting worker with pid: 1018
+[2025-11-10 09:47:07 +0000] [540] [CRITICAL] WORKER TIMEOUT (pid:1018)
+[2025-11-10 09:47:52 +0000] [1018] [INFO] Worker exiting (pid: 1018)
+[2025-11-10 09:48:37 +0000] [540] [ERROR] Worker (pid:1018) was sent SIGKILL! Perhaps out of memory?
+[2025-11-10 09:48:37 +0000] [2076] [INFO] Booting worker with pid: 2076
+[2025-11-10 09:55:47 +0000] [540] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 09:55:47 +0000] [540] [INFO] Listening at: http://0.0.0.0:5000 (540)
+[2025-11-10 09:55:47 +0000] [540] [INFO] Using worker: sync
+[2025-11-10 09:55:47 +0000] [730] [INFO] Booting worker with pid: 730
+[2025-11-10 09:56:22 +0000] [730] [INFO] Worker exiting (pid: 730)
+[2025-11-10 09:56:22 +0000] [540] [INFO] Handling signal: term
+[2025-11-10 09:56:22 +0000] [540] [ERROR] Worker (pid:730) was sent SIGTERM!
+[2025-11-10 09:56:23 +0000] [540] [INFO] Shutting down: Master
+[2025-11-10 09:57:40 +0000] [537] [INFO] Starting gunicorn 23.0.0
+[2025-11-10 09:57:40 +0000] [537] [INFO] Listening at: http://0.0.0.0:5000 (537)
+[2025-11-10 09:57:40 +0000] [537] [INFO] Using worker: sync
+[2025-11-10 09:57:40 +0000] [729] [INFO] Booting worker with pid: 729
+[2025-11-10 11:39:11 +0000] [729] [WARNING] Invalid request from ip=3.130.96.91: Invalid HTTP request line: 'SSH-2.0-Go'
+[2025-11-10 16:50:27 +0000] [537] [CRITICAL] WORKER TIMEOUT (pid:729)
+[2025-11-10 16:50:27 +0000] [729] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-10 16:50:27 +0000] [729] [INFO] Worker exiting (pid: 729)
+[2025-11-10 16:50:27 +0000] [2380] [INFO] Booting worker with pid: 2380

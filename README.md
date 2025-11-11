@@ -31,3 +31,7 @@ Flask serves the static frontend from `http://localhost:5000`. The browser page 
 
 - `GET /api/movie?query=...` proxies TMDB search + cast + reviews data.
 - `POST /api/recommend` sends the free-form description to OpenAI and returns clickable suggestions that re-use the TMDB search box automatically.
+
+### Deployment note
+
+The current EC2 deployment is reachable at `http://18.210.0.181:5000/` (update the security-group rule if you change the port).

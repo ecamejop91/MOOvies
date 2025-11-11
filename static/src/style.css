@@ -17,6 +17,90 @@ body {
   background: radial-gradient(circle at top, #1a1f2c, #080a10);
 }
 
+.hidden {
+  display: none !important;
+}
+
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #0b0d13, #05060b);
+  padding: 40px 20px;
+}
+
+.landing-card {
+  width: min(420px, 100%);
+  padding: 32px;
+  border-radius: 28px;
+  background: rgba(15, 17, 31, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.landing-card h1 {
+  margin: 0 0 12px;
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+}
+
+.landing-card p {
+  margin: 0 0 24px;
+  color: #a9b2ca;
+  line-height: 1.4;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.login-form input {
+  border-radius: 14px;
+  border: 1px solid #343b4f;
+  background: rgba(17, 20, 35, 0.9);
+  color: inherit;
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+
+#loginBtn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(120deg, #4b7bec, #a55eea);
+  color: white;
+  cursor: pointer;
+}
+
+.ghost-btn {
+  width: 100%;
+  border-radius: 14px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.ghost-btn:hover,
+#loginBtn:hover {
+  opacity: 0.88;
+}
+
+.login-error {
+  min-height: 20px;
+  font-size: 0.9rem;
+  color: #ff7272;
+}
+
 .login-frame {
   max-width: 480px;
   min-height: 100vh;
