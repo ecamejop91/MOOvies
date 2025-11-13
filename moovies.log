@@ -350,3 +350,143 @@ Traceback (most recent call last):
 SystemExit: 1
 [2025-11-10 16:50:27 +0000] [729] [INFO] Worker exiting (pid: 729)
 [2025-11-10 16:50:27 +0000] [2380] [INFO] Booting worker with pid: 2380
+[2025-11-11 18:23:40 +0000] [2380] [WARNING] Invalid request from ip=3.132.23.201: Invalid HTTP request line: 'SSH-2.0-Go'
+[2025-11-12 08:07:49 +0000] [15964] [INFO] Starting gunicorn 23.0.0
+[2025-11-12 08:07:49 +0000] [15964] [ERROR] connection to ('0.0.0.0', 443) failed: [Errno 1] Operation not permitted
+[2025-11-12 08:07:50 +0000] [15964] [ERROR] connection to ('0.0.0.0', 443) failed: [Errno 1] Operation not permitted
+[2025-11-12 08:07:51 +0000] [15964] [ERROR] connection to ('0.0.0.0', 443) failed: [Errno 1] Operation not permitted
+[2025-11-12 08:07:52 +0000] [15964] [ERROR] connection to ('0.0.0.0', 443) failed: [Errno 1] Operation not permitted
+[2025-11-12 08:07:53 +0000] [15964] [ERROR] connection to ('0.0.0.0', 443) failed: [Errno 1] Operation not permitted
+[2025-11-12 08:07:54 +0000] [15964] [ERROR] Can't connect to ('0.0.0.0', 443)
+[2025-11-12 08:08:09 +0000] [537] [INFO] Handling signal: term
+[2025-11-12 08:08:09 +0000] [2380] [INFO] Worker exiting (pid: 2380)
+[2025-11-12 08:08:09 +0000] [537] [INFO] Shutting down: Master
+[2025-11-12 08:08:14 +0000] [15991] [INFO] Starting gunicorn 23.0.0
+[2025-11-12 08:08:14 +0000] [15991] [INFO] Listening at: http://0.0.0.0:5000 (15991)
+[2025-11-12 08:08:14 +0000] [15991] [INFO] Using worker: sync
+[2025-11-12 08:08:14 +0000] [15992] [INFO] Booting worker with pid: 15992
+[2025-11-12 08:08:19 +0000] [16004] [INFO] Starting gunicorn 23.0.0
+[2025-11-12 08:08:19 +0000] [16004] [INFO] Listening at: http://0.0.0.0:443 (16004)
+[2025-11-12 08:08:19 +0000] [16004] [INFO] Using worker: sync
+[2025-11-12 08:08:19 +0000] [16005] [INFO] Booting worker with pid: 16005
+[2025-11-12 08:08:26 +0000] [15991] [INFO] Handling signal: term
+[2025-11-12 08:08:26 +0000] [15992] [INFO] Worker exiting (pid: 15992)
+[2025-11-12 08:08:26 +0000] [15991] [INFO] Shutting down: Master
+[2025-11-12 08:15:10 +0000] [16005] [INFO] Worker exiting (pid: 16005)
+[2025-11-12 08:15:10 +0000] [16004] [INFO] Handling signal: term
+[2025-11-12 08:15:10 +0000] [16004] [ERROR] Worker (pid:16005) was sent SIGTERM!
+[2025-11-12 08:15:10 +0000] [16004] [INFO] Shutting down: Master
+[2025-11-12 08:16:03 +0000] [16435] [INFO] Starting gunicorn 23.0.0
+[2025-11-12 08:16:03 +0000] [16435] [INFO] Listening at: http://0.0.0.0:5000 (16435)
+[2025-11-12 08:16:03 +0000] [16435] [INFO] Using worker: sync
+[2025-11-12 08:16:03 +0000] [16439] [INFO] Booting worker with pid: 16439
+[2025-11-12 08:57:48 +0000] [16435] [CRITICAL] WORKER TIMEOUT (pid:16439)
+[2025-11-12 08:57:48 +0000] [16439] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-12 08:57:48 +0000] [16439] [INFO] Worker exiting (pid: 16439)
+[2025-11-12 08:57:49 +0000] [19637] [INFO] Booting worker with pid: 19637
+[2025-11-12 09:12:19 +0000] [16435] [CRITICAL] WORKER TIMEOUT (pid:19637)
+[2025-11-12 09:12:19 +0000] [19637] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-12 09:12:19 +0000] [19637] [INFO] Worker exiting (pid: 19637)
+[2025-11-12 09:12:19 +0000] [20589] [INFO] Booting worker with pid: 20589
+[2025-11-12 13:59:23 +0000] [16435] [CRITICAL] WORKER TIMEOUT (pid:20589)
+[2025-11-12 13:59:23 +0000] [20589] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/MOOvies/.venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-11-12 13:59:23 +0000] [20589] [INFO] Worker exiting (pid: 20589)
+[2025-11-12 13:59:23 +0000] [28551] [INFO] Booting worker with pid: 28551
+[2025-11-12 18:00:17 +0000] [28551] [WARNING] Invalid request from ip=3.149.59.26: Invalid HTTP request line: 'SSH-2.0-Go'
+[2025-11-12 19:00:32 +0000] [16435] [CRITICAL] WORKER TIMEOUT (pid:28551)
+[2025-11-12 19:29:36 +0000] [16435] [ERROR] Worker (pid:28551) was sent SIGKILL! Perhaps out of memory?
+[2025-11-12 19:29:36 +0000] [37053] [INFO] Booting worker with pid: 37053
+[2025-11-12 19:32:14 +0000] [37053] [WARNING] Invalid request from ip=3.131.215.38: Invalid HTTP request line: 'SSH-2.0-Go'
+[2025-11-12 19:42:01 +0000] [16435] [CRITICAL] WORKER TIMEOUT (pid:37053)
+[2025-11-12 19:42:34 +0000] [37053] [INFO] Worker exiting (pid: 37053)
+[2025-11-12 19:43:45 +0000] [16435] [ERROR] Worker (pid:37053) was sent SIGKILL! Perhaps out of memory?
+[2025-11-12 19:43:45 +0000] [37095] [INFO] Booting worker with pid: 37095
+[2025-11-13 01:10:28 +0000] [2199] [INFO] Starting gunicorn 23.0.0
+[2025-11-13 01:10:28 +0000] [2199] [INFO] Listening at: http://0.0.0.0:5000 (2199)
+[2025-11-13 01:10:28 +0000] [2199] [INFO] Using worker: sync
+[2025-11-13 01:10:28 +0000] [2200] [INFO] Booting worker with pid: 2200
+[2025-11-13 01:10:46 +0000] [2199] [INFO] Handling signal: term
+[2025-11-13 01:10:46 +0000] [2200] [INFO] Worker exiting (pid: 2200)
+[2025-11-13 01:10:47 +0000] [2199] [INFO] Shutting down: Master
+[2025-11-13 01:10:47 +0000] [2219] [INFO] Starting gunicorn 23.0.0
+[2025-11-13 01:10:47 +0000] [2219] [INFO] Listening at: http://0.0.0.0:5000 (2219)
+[2025-11-13 01:10:47 +0000] [2219] [INFO] Using worker: sync
+[2025-11-13 01:10:47 +0000] [2221] [INFO] Booting worker with pid: 2221

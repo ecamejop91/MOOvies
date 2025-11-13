@@ -1,0 +1,24 @@
+MOOvies Deployment Troubleshooting (2025-11-13)
+==============================================
+
+1. Checked process status
+   - Verified no Gunicorn process was running even though the site previously served HTTPS via nginx/Cloudflare.
+   - Inspected existing moovies.log, gunicorn.pid, and start_server.sh to understand the expected startup path.
+
+2. Reviewed logs/systemd configuration
+   - Tail of moovies.log showed repeated Gunicorn worker timeouts and invalid requests but no current listener.
+   - Discovered a systemd unit (`/etc/systemd/system/moovies.service`) configured to auto-start Gunicorn at boot.
+   - `systemctl status` plus `journalctl -u moovies.service` revealed the service was stuck in an auto-restart loop because Gunicorn could not write `/home/ubuntu/MOOvies/moovies.log` (PermissionError 13). The log file had been created by root during a previous manual run, so the ubuntu user lacked write access.
+
+3. Fix applied
+   - Changed ownership of moovies.log back to ubuntu:ubuntu so the systemd-run Gunicorn could write to it: `sudo chown ubuntu:ubuntu /home/ubuntu/MOOvies/moovies.log`.
+   - Restarted the systemd unit with `sudo systemctl restart moovies.service` and confirmed it stayed active, spawning Gunicorn workers bound to 0.0.0.0:5000.
+   - Verified port 5000 was listening via `sudo lsof -i :5000`.
+
+4. Remaining observations
+   - Local curls to http://127.0.0.1:5000/ still fail, suggesting nginx or firewall changes are intercepting/redirecting traffic; this needs follow-up but is outside the Gunicorn startup issue.
+   - Confirmed the service is enabled (`systemctl is-enabled moovies.service`), so with the log ownership fixed it will auto-start successfully after future reboots, as long as the log file is not recreated as root.
+
+Issue summary
+-------------
+Gunicorn was not running because the systemd-managed service could not open its log file, which had root ownership from a prior sudo run of start_server.sh. After correcting the log file permissions and restarting the service, Gunicorn now starts automatically on boot and listens on port 5000, allowing nginx/Cloudflare to serve HTTPS traffic once further proxy/firewall checks are completed.
