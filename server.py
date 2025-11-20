@@ -1,5 +1,6 @@
 import json
 import os
+import random
 from typing import Dict, List, Optional
 
 import firebase_admin
@@ -149,6 +150,36 @@ def movie_lookup():
             "reviews": (reviews or {}).get("results") or [],
         }
     )
+
+
+@app.get("/api/random-movies")
+def random_movies():
+    try:
+        feed = tmdb_get("/trending/movie/week")
+    except RuntimeError as err:
+        return jsonify({"error": str(err)}), 500
+    except requests.RequestException as err:  # pragma: no cover - network
+        return jsonify({"error": f"TMDB random fetch failed: {err}"}), 502
+
+    results = (feed or {}).get("results") or []
+    if not results:
+        return jsonify({"results": []})
+
+    sample_size = min(12, len(results))
+    picks = random.sample(results, sample_size)
+    payload = []
+    for movie in picks:
+        if not (movie.get("backdrop_path") or movie.get("poster_path")):
+            continue
+        payload.append(
+            {
+                "title": movie.get("title") or movie.get("name"),
+                "backdrop_path": movie.get("backdrop_path"),
+                "poster_path": movie.get("poster_path"),
+            }
+        )
+
+    return jsonify({"results": payload})
 
 
 def tmdb_get(path: str, params: Optional[Dict[str, str]] = None) -> Dict:

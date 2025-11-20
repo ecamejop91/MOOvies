@@ -1,0 +1,9 @@
+__pycache__
+*.pyc
+*.pid
+*.log
+.venv
+.env
+.git
+.gitignore
+start_server.sh

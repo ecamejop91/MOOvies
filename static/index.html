@@ -14,7 +14,9 @@
     <div class="frame" id="appShell">
       <header>
         <h1>MOOvies</h1>
-        
+        <div class="header-actions">
+          <a href="/watchlist.html" class="watchlist-link">Watchlist</a>
+        </div>
       </header>
 
       <div class="searchbar">
@@ -27,11 +29,31 @@
         <button id="searchBtn" type="button">Find</button>
       </div>
 
-      <section class="layout-grid" aria-label="movie layout">
+      <section class="ai-panel" aria-label="AI recommendations">
+        <div class="box describe-box">
+          <div class="label">Describe a Movie</div>
+          <textarea
+            id="descriptionInput"
+            rows="4"
+            placeholder="Describe a movie vibe, plot, or tone…"
+          ></textarea>
+          <button id="recommendBtn" type="button">Lets find the movie!</button>
+        </div>
+        <div class="box recommendations-box" aria-live="polite">
+          <div class="label">AI Recommendations</div>
+          <div id="recommendationsStatus">Enter a description to get suggestions.</div>
+          <ul id="recommendationsList"></ul>
+        </div>
+      </section>
+
+      <section id="layoutGrid" class="layout-grid is-hidden" aria-label="movie layout">
         <div id="heroPanel" class="box hero-panel" aria-live="polite">
           <div class="hero-backdrop" id="heroBackdrop" aria-hidden="true"></div>
           <p class="hero-hint"></p>
           <div id="movieTitle" class="hero-title">Awaiting Selection</div>
+          <button id="bookmarkBtn" class="bookmark-btn" type="button" disabled>
+            ☆ Add to Watchlist
+          </button>
         </div>
 
         <div id="overview" class="box overview-panel">
@@ -59,24 +81,9 @@
             <div class="cast-card">pic.</div>
           </div>
         </div>
+
       </section>
 
-      <section class="ai-panel" aria-label="AI recommendations">
-        <div class="box describe-box">
-          <div class="label">Describe a Movie</div>
-          <textarea
-            id="descriptionInput"
-            rows="4"
-            placeholder="Describe a movie vibe, plot, or tone…"
-          ></textarea>
-          <button id="recommendBtn" type="button">Lets find the movie!</button>
-        </div>
-        <div class="box recommendations-box" aria-live="polite">
-          <div class="label">AI Recommendations</div>
-          <div id="recommendationsStatus">Enter a description to get suggestions.</div>
-          <ul id="recommendationsList"></ul>
-        </div>
-      </section>
     </div>
   </body>
 </html>

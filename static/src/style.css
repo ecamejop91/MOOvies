@@ -188,6 +188,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 header h1 {
@@ -201,10 +203,35 @@ header p {
   color: #a3acc3;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.watchlist-link {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 179, 255, 0.5);
+  background: rgba(80, 140, 255, 0.12);
+  color: #bfe0ff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 6px 18px rgba(62, 120, 255, 0.15);
+}
+
+.watchlist-link:hover {
+  background: rgba(120, 179, 255, 0.25);
+  color: #e3f1ff;
+  border-color: rgba(120, 179, 255, 0.8);
+}
+
 .user-container {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .user-email {
@@ -270,6 +297,10 @@ header p {
     "overview reviews rating"
     "overview cast cast";
   gap: 18px;
+}
+
+.layout-grid.is-hidden {
+  display: none;
 }
 
 .box {
@@ -341,6 +372,56 @@ header p {
   color: rgba(255, 255, 255, 0.15);
   margin: 0;
   user-select: none;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(14, 18, 28, 0.85);
+  color: #fff;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bookmark-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bookmark-btn:not([disabled]):hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.bookmark-btn.bookmark-active {
+  background: linear-gradient(120deg, #ffb347, #ffcc33);
+  color: #1b1f2c;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.bookmark-btn.bookmark-pulse {
+  animation: bookmarkPulse 0.5s ease;
+}
+
+@keyframes bookmarkPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(255, 204, 51, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  }
 }
 
 #movieOverview {
@@ -463,7 +544,122 @@ textarea {
   transform: translateY(-1px);
 }
 
+.watchlist-frame {
+  gap: 32px;
+}
+
+.watchlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.watchlist-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(13, 17, 26, 0.7);
+  overflow: hidden;
+}
+
+.watchlist-poster {
+  min-height: 180px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3acc3;
+}
+
+.watchlist-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.watchlist-body h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.watchlist-body p {
+  margin: 0;
+  color: #a3acc3;
+  line-height: 1.4;
+}
+
+.watchlist-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8a94ad;
+}
+
+.remove-watchlist-btn {
+  align-self: flex-start;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  background: rgba(233, 31, 99, 0.3);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.remove-watchlist-btn:hover {
+  background: rgba(233, 31, 99, 0.5);
+}
+
+.watchlist-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #8a94ad;
+}
+
 @media (max-width: 640px) {
+  header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .user-container,
+  .header-actions {
+    width: 100%;
+  }
+
+  .user-container {
+    order: -2;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: -6px;
+  }
+
+  header h1 {
+    order: -1;
+    margin-right: 8px;
+  }
+
+  .header-actions {
+    order: -1;
+    justify-content: flex-start;
+    width: auto;
+    margin-bottom: 4px;
+  }
+
+  .watchlist-link {
+    width: auto;
+  }
+
   .searchbar {
     flex-direction: column;
   }

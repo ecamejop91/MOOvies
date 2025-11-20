@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOOvies – Watchlist</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script src="./src/watchlist.js" defer></script>
+  </head>
+  <body>
+    <div class="frame watchlist-frame">
+      <header class="watchlist-header">
+        <h1>Your Watchlist</h1>
+        <a href="/app" class="watchlist-link">← Back to Finder</a>
+      </header>
+      <section id="watchlistSection" class="watchlist-grid" aria-live="polite">
+        <div class="watchlist-empty">Loading your saved movies…</div>
+      </section>
+    </div>
+  </body>
+</html>

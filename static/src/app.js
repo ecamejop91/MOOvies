@@ -6,6 +6,8 @@ const descriptionInput = $("descriptionInput");
 const recommendBtn = $("recommendBtn");
 const recommendationsStatus = $("recommendationsStatus");
 const recommendationsList = $("recommendationsList");
+const bookmarkBtn = $("bookmarkBtn");
+const layoutGrid = $("layoutGrid");
 
 // Initialize Firebase in the app (loaded globally on the page)
 const auth = window.firebase ? firebase.auth() : null;
@@ -77,15 +79,91 @@ const castGrid = $("castGrid");
 
 const IMG_BASE = "https://image.tmdb.org/t/p";
 const IMG_CAST = `${IMG_BASE}/w185`;
+const IMG_BG = `${IMG_BASE}/w780`;
 const RECOMMEND_ENDPOINT = "/api/recommend";
 const MOVIE_ENDPOINT = "/api/movie";
+const RANDOM_MOVIES_ENDPOINT = "/api/random-movies";
+const WATCHLIST_KEY = "moovies_watchlist";
 
 const overviewBg = document.querySelector("#overview .bg");
 const heroBackdrop = document.getElementById("heroBackdrop");
 
+let heroShuffleTimer = null;
+let heroShufflePool = [];
+let heroShuffleIndex = 0;
+let heroShuffleActive = false;
+let hasTriggeredSearch = false;
+const HERO_SHUFFLE_INTERVAL = 6000;
+let currentMovie = null;
+let hasRevealedGrid = false;
+
+function loadWatchlist() {
+  try {
+    return JSON.parse(localStorage.getItem(WATCHLIST_KEY)) || [];
+  } catch (err) {
+    console.error("Failed to parse watchlist", err);
+    return [];
+  }
+}
+
+function saveWatchlist(list) {
+  localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list));
+}
+
+function isInWatchlist(id) {
+  return loadWatchlist().some((item) => item.id === id);
+}
+
+function updateBookmarkButton(movie) {
+  if (!bookmarkBtn) return;
+  if (!movie || !movie.id) {
+    bookmarkBtn.disabled = true;
+    bookmarkBtn.textContent = "☆ Add to Watchlist";
+    bookmarkBtn.setAttribute("aria-pressed", "false");
+    bookmarkBtn.classList.remove("bookmark-active");
+    return;
+  }
+  const saved = isInWatchlist(movie.id);
+  bookmarkBtn.disabled = false;
+  bookmarkBtn.textContent = saved ? "★ In Watchlist" : "☆ Add to Watchlist";
+  bookmarkBtn.setAttribute("aria-pressed", saved ? "true" : "false");
+  bookmarkBtn.classList.toggle("bookmark-active", saved);
+}
+
+function toggleWatchlist(movie) {
+  if (!movie || !movie.id) return;
+  const list = loadWatchlist();
+  const exists = list.findIndex((item) => item.id === movie.id);
+  if (exists >= 0) {
+    list.splice(exists, 1);
+  } else {
+    list.push(movie);
+    triggerBookmarkPulse();
+  }
+  saveWatchlist(list);
+  updateBookmarkButton(movie);
+}
+
+function revealLayoutGrid() {
+  if (!layoutGrid || hasRevealedGrid) return;
+  layoutGrid.classList.remove("is-hidden");
+  hasRevealedGrid = true;
+}
+
+function triggerBookmarkPulse() {
+  if (!bookmarkBtn) return;
+  bookmarkBtn.classList.remove("bookmark-pulse");
+  // Force reflow so the animation can restart
+  void bookmarkBtn.offsetWidth;
+  bookmarkBtn.classList.add("bookmark-pulse");
+}
+
 function setOverviewBg(path) {
-  const IMG_BG = `${IMG_BASE}/w780`;
-  [overviewBg, heroBackdrop]
+  const targets = [overviewBg];
+  if (!heroShuffleActive) {
+    targets.push(heroBackdrop);
+  }
+  targets
     .filter(Boolean)
     .forEach((el) => {
       if (path) {
@@ -96,6 +174,63 @@ function setOverviewBg(path) {
         el.style.display = "none";
       }
     });
+}
+
+function setHeroBackdropOnly(path) {
+  if (!heroBackdrop) return;
+  if (path) {
+    heroBackdrop.style.backgroundImage = `url(${IMG_BG}${path})`;
+    heroBackdrop.style.display = "block";
+  } else {
+    heroBackdrop.style.backgroundImage = "none";
+    heroBackdrop.style.display = "none";
+  }
+}
+
+function stopHeroBackdropShuffle() {
+  heroShuffleActive = false;
+  if (heroShuffleTimer) {
+    clearInterval(heroShuffleTimer);
+    heroShuffleTimer = null;
+  }
+}
+
+function startHeroBackdropShuffle() {
+  if (heroShuffleActive || !heroShufflePool.length || hasTriggeredSearch) {
+    return;
+  }
+  heroShuffleActive = true;
+  setHeroBackdropOnly(heroShufflePool[heroShuffleIndex]);
+  heroShuffleTimer = setInterval(() => {
+    if (!heroShufflePool.length) return;
+    heroShuffleIndex = (heroShuffleIndex + 1) % heroShufflePool.length;
+    setHeroBackdropOnly(heroShufflePool[heroShuffleIndex]);
+  }, HERO_SHUFFLE_INTERVAL);
+}
+
+async function primeHeroBackdropShuffle() {
+  try {
+    const res = await fetchWithAuth(RANDOM_MOVIES_ENDPOINT);
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to load random movies");
+    }
+    heroShufflePool = (data.results || [])
+      .map((movie) => movie.backdrop_path || movie.poster_path)
+      .filter(Boolean);
+    heroShuffleIndex = 0;
+    if (!heroShufflePool.length || hasTriggeredSearch) {
+      return;
+    }
+    if (heroShufflePool.length === 1) {
+      heroShuffleActive = true;
+      setHeroBackdropOnly(heroShufflePool[0]);
+      return;
+    }
+    startHeroBackdropShuffle();
+  } catch (err) {
+    console.error("Random hero fetch failed", err);
+  }
 }
 
 // Generic fetch helper with optional authentication
@@ -144,6 +279,8 @@ function clearUI() {
   reviewsContainer.innerHTML = "—";
   castGrid.innerHTML = "";
   setOverviewBg(null);
+  currentMovie = null;
+  updateBookmarkButton(null);
 }
 
 function renderReviews(reviews) {
@@ -200,6 +337,14 @@ async function searchAndFill(query) {
     return;
   }
 
+  if (!hasTriggeredSearch) {
+    hasTriggeredSearch = true;
+    stopHeroBackdropShuffle();
+    revealLayoutGrid();
+  } else {
+    revealLayoutGrid();
+  }
+
   try {
     const data = await getMovieData(query);
     const movie = data.movie;
@@ -217,6 +362,15 @@ async function searchAndFill(query) {
         : "—"
     );
     setOverviewBg(movie.backdrop_path || movie.poster_path);
+    currentMovie = {
+      id: movie.id,
+      title: movie.title,
+      overview: movie.overview,
+      poster_path: movie.poster_path,
+      backdrop_path: movie.backdrop_path,
+      release_date: movie.release_date,
+    };
+    updateBookmarkButton(currentMovie);
 
     renderCast(data.credits);
     renderReviews(data.reviews);
@@ -305,5 +459,15 @@ descriptionInput.addEventListener("keydown", (e) => {
   }
 });
 
+if (bookmarkBtn) {
+  bookmarkBtn.addEventListener("click", () => {
+    if (currentMovie) {
+      toggleWatchlist(currentMovie);
+    }
+  });
+}
+
 // Optional: initial demo
 // searchAndFill("Titanic");
+
+primeHeroBackdropShuffle();
