@@ -36,3 +36,4 @@ Flask serves the static frontend from `http://localhost:5000`. The browser page 
 
 The current EC2 deployment is reachable at `http://18.210.0.181:5000/` (update the security-group rule if you change the port).
 # test change for JIRAMOOVIE-29
+Test commit for JIRAMOOVIE-26
